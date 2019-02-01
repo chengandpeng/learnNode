@@ -5,6 +5,6 @@ module.exports = {
   // googleClientSecret: 'KnH-rZC23z4fr2CN4ISK4srN',
   googleClientSecret: '0Okmdcx2ozG-iN1WguDExtN1',
   // mongoURI: 'mongodb://readonly:password@ds063124.mlab.com:63124/blog_everyone',
-  mongoURI: 'mongodb://chengandpeng:priest41581@ds119085.mlab.com:19085/blog_dev',
+  mongoURI: 'mongodb://chengandpeng:password123@ds119085.mlab.com:19085/blog_dev',
   cookieKey: '123123123'
 };
