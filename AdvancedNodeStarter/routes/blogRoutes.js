@@ -14,28 +14,9 @@ module.exports = app => {
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
-    const redis = require('redis');
-    const redisUrl = 'redis://127.0.0.1:6379';
-    const client = redis.createClient(redisUrl);
-    const util = require('util');
-    client.get = util.promisify(client.get);
-    
-    // find cached in reids
-    const cachedBlogs = await client.get(req.user.id);
-
-    // has cached 
-    if (cachedBlogs) {
-      console.log('CACHE:' , cachedBlogs);
-      return res.send(JSON.parse(cachedBlogs));
-    } 
-
-    // no cached
     const blogs = await Blog.find({ _user: req.user.id });
 
-    console.log('MONGODB:' , cachedBlogs);
     res.send(blogs);
-
-    client.setnx(req.user.id, JSON.stringify(blogs));
   });
 
   app.post('/api/blogs', requireLogin, async (req, res) => {
