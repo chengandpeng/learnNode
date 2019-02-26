@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import map from 'lodash/map';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchBlogs } from '../../actions';
+import { fetchBlogs, deleteBlog } from '../../actions';
 
 class BlogList extends Component {
   componentDidMount() {
     this.props.fetchBlogs();
+  }
+
+  handleClickDelete = (e, id) => {
+    // e.preventDefault();
+    this.props.deleteBlog(id);
   }
 
   renderBlogs() {
@@ -20,6 +25,11 @@ class BlogList extends Component {
             </div>
             <div className="card-action">
               <Link to={`/blogs/${blog._id}`}>Read</Link>
+              <a 
+                className="waves-effect waves-teal btn-flat"
+                onClick={(e) => this.handleClickDelete(e, blog._id)}>
+                  Delete
+              </a>
             </div>
           </div>
         </div>
@@ -36,4 +46,4 @@ function mapStateToProps({ blogs }) {
   return { blogs };
 }
 
-export default connect(mapStateToProps, { fetchBlogs })(BlogList);
+export default connect(mapStateToProps, { fetchBlogs, deleteBlog })(BlogList);
